@@ -3,25 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
-    <!--<com.google.vr.cardboard.CardboardGLSurfaceView-->
-    <!--android:id="@+id/cardboard_g_l_surface_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:layout_alignParentTop="true" />-->
 
-    <!--<com.google.vr.ndk.base.GvrSurfaceView-->
-    <!--android:id="@+id/gvr_surface_view"-->
+    <!--<FrameLayout-->
+    <!--android:id="@+id/frame_layout_content"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
     <!--android:layout_alignParentStart="true"-->
     <!--android:layout_alignParentTop="true" />-->
 
 
-    <com.google.vr.ndk.base.GvrLayout
-        android:id="@+id/gvr_layout"
+    <!--<com.sung.noel.tw.demo_googlevr.util.surfaceview.CustomSurfaceView-->
+        <!--android:id="@+id/surface_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true" />-->
+
+    <com.sung.noel.tw.demo_googlevr.util.surfaceview.CustomVRSurfaceView
+        android:id="@+id/custom_v_r_surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"

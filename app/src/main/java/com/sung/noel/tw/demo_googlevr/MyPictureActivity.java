@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
+import com.sung.noel.tw.demo_googlevr.util.VRImageLoader;
 
 import java.io.FileNotFoundException;
 
@@ -30,8 +31,11 @@ import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
+/**
+ * Created by noel on 2019/1/10.
+ */
 @RuntimePermissions
-public class MyPictureActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyPictureActivity extends AppCompatActivity implements View.OnClickListener, VRImageLoader.OnVRImageLoadedListener {
     private final int RESULT_CODE_PHOTO = 11;
 
     private VrPanoramaView vrPanoramaView;
@@ -59,6 +63,8 @@ public class MyPictureActivity extends AppCompatActivity implements View.OnClick
         vrPanoramaView.setInfoButtonEnabled(false);
         //隱藏立體模型按鈕
         vrPanoramaView.setStereoModeButtonEnabled(false);
+        //關閉手勢拖動
+//        vrPanoramaView.setTouchTrackingEnabled(false);
         //設置接口
         vrPanoramaView.setEventListener(new VrPanoramaEventListener() {
             /**
@@ -175,14 +181,14 @@ public class MyPictureActivity extends AppCompatActivity implements View.OnClick
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //圖片選擇完成
         if (requestCode == RESULT_CODE_PHOTO && data != null) {
-
             //取得照片路徑uri
             Uri uri = data.getData();
             ContentResolver contentResolver = this.getContentResolver();
 
             //讀取照片，型態為Bitmap
             try {
-                setImage(BitmapFactory.decodeStream(contentResolver.openInputStream(uri)));
+                new VRImageLoader(this,contentResolver.openInputStream(uri)).setOnVRImageLoadedListener(this).execute();
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -191,6 +197,18 @@ public class MyPictureActivity extends AppCompatActivity implements View.OnClick
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    //---------
+
+    /***
+     * 當完成所選圖片讀取
+     */
+    @Override
+    public void onVRImageLoaded(Bitmap bitmap) {
+        setImage(bitmap);
+    }
+
     //-----------------------------
 
     /***
@@ -220,4 +238,6 @@ public class MyPictureActivity extends AppCompatActivity implements View.OnClick
         });
         alert.show();
     }
+
+
 }
