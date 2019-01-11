@@ -3,6 +3,10 @@
     <string name="toast_permission_refuse">拒絕權限要求,將無法使用此功能。</string>
     <string name="dialog_message_goto_setting">是否前往開啟權限？</string>
     <string name="dialog_go">前往</string>
+    <string name="none_sensor">此裝置不具備方向傳感器</string>
+
+
+
 
     <!--套件金鑰 拍攝環景-->
     <!--<string name="dji_developer_key">2ebc4439de6b85158536496c</string>-->

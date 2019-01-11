@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //開始拍攝
             case R.id.button_take_picture:
+                customVRSurfaceView.takePicture(System.currentTimeMillis()+"");
                 break;
         }
     }

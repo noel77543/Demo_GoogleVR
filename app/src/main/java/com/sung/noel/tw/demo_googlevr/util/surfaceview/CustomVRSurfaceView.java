@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -14,8 +15,7 @@ import com.google.vr.ndk.base.GvrSurfaceView;
 
 import java.io.IOException;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+
 
 /**
  * Created by noel on 2019/1/10.
@@ -38,7 +38,7 @@ public class CustomVRSurfaceView extends SurfaceView implements Camera.PictureCa
     //--------------
 
     private void init() {
-        surfaceHolder =  getHolder();
+        surfaceHolder = getHolder();
         surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -66,6 +66,7 @@ public class CustomVRSurfaceView extends SurfaceView implements Camera.PictureCa
 
 
     //---------
+
     /***
      * 當surfaceview 被創建
      * @param holder
@@ -83,6 +84,7 @@ public class CustomVRSurfaceView extends SurfaceView implements Camera.PictureCa
 
     }
     //---------
+
     /***
      * 自動對焦設置
      * @param holder
@@ -93,6 +95,7 @@ public class CustomVRSurfaceView extends SurfaceView implements Camera.PictureCa
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Log.e("AAA", camera.getParameters().getHorizontalViewAngle() + "");
         camera.autoFocus(new Camera.AutoFocusCallback() {
             @Override
             public void onAutoFocus(boolean success, Camera camera) {
@@ -103,6 +106,7 @@ public class CustomVRSurfaceView extends SurfaceView implements Camera.PictureCa
         });
     }
     //---------
+
     /***
      * 當surface被銷毀 回收資源
      * @param holder
