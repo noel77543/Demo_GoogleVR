@@ -6,7 +6,6 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -20,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
-import com.sung.noel.tw.demo_googlevr.util.VRImageLoader;
+import com.sung.noel.tw.demo_googlevr.util.LoadImageTask;
 
 import java.io.FileNotFoundException;
 
@@ -35,7 +34,7 @@ import permissions.dispatcher.RuntimePermissions;
  * Created by noel on 2019/1/10.
  */
 @RuntimePermissions
-public class MyPictureActivity extends AppCompatActivity implements View.OnClickListener, VRImageLoader.OnVRImageLoadedListener {
+public class MyPictureActivity extends AppCompatActivity implements View.OnClickListener, LoadImageTask.OnVRImageLoadedListener {
     private final int RESULT_CODE_PHOTO = 11;
 
     private VrPanoramaView vrPanoramaView;
@@ -187,7 +186,7 @@ public class MyPictureActivity extends AppCompatActivity implements View.OnClick
 
             //讀取照片，型態為Bitmap
             try {
-                new VRImageLoader(this,contentResolver.openInputStream(uri)).setOnVRImageLoadedListener(this).execute();
+                new LoadImageTask(this,contentResolver.openInputStream(uri)).setOnVRImageLoadedListener(this).execute();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

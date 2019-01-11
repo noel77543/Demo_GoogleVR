@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.Display;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.WindowManager;
 
 import com.google.vr.ndk.base.GvrSurfaceView;
@@ -19,11 +20,13 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * Created by noel on 2019/1/10.
  */
-public class CustomVRSurfaceView extends GvrSurfaceView implements GLSurfaceView.Renderer, Camera.PictureCallback {
+public class CustomVRSurfaceView extends SurfaceView implements Camera.PictureCallback, SurfaceHolder.Callback {
 
     private String fileName;
     private Context context;
     private Camera camera;
+    private SurfaceHolder surfaceHolder;
+
 
     public CustomVRSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,10 +38,13 @@ public class CustomVRSurfaceView extends GvrSurfaceView implements GLSurfaceView
     //--------------
 
     private void init() {
-
+        surfaceHolder =  getHolder();
+        surfaceHolder = getHolder();
+        surfaceHolder.addCallback(this);
+        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
         //設置為openGLE 2.0
-        setEGLContextClientVersion(2);
+//        setEGLContextClientVersion(2);
 
 
         //EGL設置 須在調用 setRenderer之前
@@ -49,12 +55,12 @@ public class CustomVRSurfaceView extends GvrSurfaceView implements GLSurfaceView
         //EGLContext設置
         //setEGLContextFactory();
 
-        setRenderer(this);
+//        setRenderer(this);
 
         //渲染方式設置
         //RENDERMODE_WHEN_DIRTY    表示被動渲染，只有在調用requestRender或者onResume等方法時才會進行渲染。
         //RENDERMODE_CONTINUOUSLY  表示持續渲染
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+//        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
     }
 
@@ -69,7 +75,7 @@ public class CustomVRSurfaceView extends GvrSurfaceView implements GLSurfaceView
         camera = Camera.open();
         camera.setDisplayOrientation(getDisplayOrientation());
         try {
-            camera.setPreviewDisplay(getHolder());
+            camera.setPreviewDisplay(surfaceHolder);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -159,30 +165,6 @@ public class CustomVRSurfaceView extends GvrSurfaceView implements GLSurfaceView
      */
     @Override
     public void onPictureTaken(byte[] data, Camera camera) {
-
-    }
-    //-------
-
-    @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-
-    }
-    //-------
-
-    @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-
-    }
-    //-------
-
-    @Override
-    public void onDrawFrame(GL10 gl) {
-
-    }
-    //-------
-
-    @Override
-    public void surfaceRedrawNeededAsync(SurfaceHolder holder, Runnable drawingFinished) {
 
     }
 

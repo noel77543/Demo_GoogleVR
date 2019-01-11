@@ -3,21 +3,20 @@ package com.sung.noel.tw.demo_googlevr.util;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class VRImageLoader extends AsyncTask<Void, Void, Void> {
+public class LoadImageTask extends AsyncTask<Void, Void, Void> {
 
     private OnVRImageLoadedListener onVRImageLoadedListener;
     private InputStream inputStream;
     private Bitmap bitmap;
     private Context context;
 
-    public VRImageLoader( Context context,InputStream inputStream) {
+    public LoadImageTask(Context context, InputStream inputStream) {
         this.context =context;
         this.inputStream = inputStream;
     }
@@ -58,7 +57,7 @@ public class VRImageLoader extends AsyncTask<Void, Void, Void> {
 
     //-------
 
-    public VRImageLoader setOnVRImageLoadedListener(OnVRImageLoadedListener onVRImageLoadedListener) {
+    public LoadImageTask setOnVRImageLoadedListener(OnVRImageLoadedListener onVRImageLoadedListener) {
         this.onVRImageLoadedListener = onVRImageLoadedListener;
         return this;
     }

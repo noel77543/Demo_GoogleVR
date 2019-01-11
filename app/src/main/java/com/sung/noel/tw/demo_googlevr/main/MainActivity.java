@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.sung.noel.tw.demo_googlevr.MyPictureActivity;
 import com.sung.noel.tw.demo_googlevr.R;
+import com.sung.noel.tw.demo_googlevr.util.ImageUtil;
 import com.sung.noel.tw.demo_googlevr.util.surfaceview.CustomVRSurfaceView;
 
 import permissions.dispatcher.NeedsPermission;
@@ -33,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button buttonTakePicture;
     private Button buttonMyPicture;
-    private FrameLayout frameLayoutContent;
-    private CustomSurfaceView customSurfaceView;
     private CustomVRSurfaceView customVRSurfaceView;
 
     @Override
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //開始拍攝
             case R.id.button_take_picture:
-
                 break;
         }
     }
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        customSurfaceView = findViewById(R.id.surface_view);
 
         customVRSurfaceView = findViewById(R.id.custom_v_r_surface_view);
-
 
 
         buttonTakePicture.setOnClickListener(this);
